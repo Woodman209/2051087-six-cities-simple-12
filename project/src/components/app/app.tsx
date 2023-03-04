@@ -1,4 +1,4 @@
-import WelcomeScreen from '../../pages/welcome-screen/welcome-screen';
+import MainScreen from '../../pages/main-screen/main-screen';
 
 type RentCount = {
   count: number;
@@ -6,7 +6,7 @@ type RentCount = {
 
 function App({count}: RentCount): JSX.Element {
   return (
-    <WelcomeScreen count = {count}></WelcomeScreen>
+    <MainScreen count = {count}></MainScreen>
   );
 }
 
