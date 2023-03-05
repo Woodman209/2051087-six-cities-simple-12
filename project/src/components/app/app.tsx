@@ -4,9 +4,9 @@ type RentCount = {
   count: number;
 }
 
-function App({count}: RentCount): JSX.Element {
+function App({ count }: RentCount): JSX.Element {
   return (
-    <MainScreen count = {count}></MainScreen>
+    <MainScreen count={count}></MainScreen>
   );
 }
 

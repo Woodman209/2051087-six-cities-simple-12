@@ -1,4 +1,4 @@
-export default function MainEmptyScreen() {
+export default function MainEmptyScreen(): JSX.Element {
   return (
     <div className="cities">
       <div className="cities__places-container cities__places-container--empty container">

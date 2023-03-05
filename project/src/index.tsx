@@ -13,7 +13,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <App
-      count = {Setting.count}
+      count={Setting.count}
     />
   </React.StrictMode>,
 );

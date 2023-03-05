@@ -1,4 +1,4 @@
-export default function PropertyNotLoggedScreen() {
+export default function PropertyNotLoggedScreen(): JSX.Element {
   return (
     <div className="page">
       <div style={{ display: 'none' }}>
