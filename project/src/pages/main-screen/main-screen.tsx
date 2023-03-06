@@ -1,4 +1,4 @@
-import MainScreenApp from '../../components/card-component';
+import MainScreenApp from '../../components/card/card-component';
 
 type RentCountProps = {
   count: number;
