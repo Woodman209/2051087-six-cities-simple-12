@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import MainScreen from '../../pages/main-screen/main-screen';
 // import MainEmptyScreen from '../../pages/main-empty-screen/main-empty-screen';
@@ -25,7 +27,15 @@ function App({ count }: RentCount): JSX.Element {
         />
         <Route
           path={`${AppRoute.Room}:id`}
-          element={<PropertyScreen />}
+          element={
+            <PropertyScreen
+              getNearbyOffers={props.getNearbyOffers}
+              headerBlock={headerBlock}
+              offers={props.offers}
+              reviews={props.reviews}
+              isUserLoggedIn={props.userLogin !== undefined}
+            />
+          }
         />
         <Route
           path={AppRoute.NotFound}
