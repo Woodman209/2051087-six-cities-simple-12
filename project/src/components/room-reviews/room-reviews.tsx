@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { OfferId, Reviews } from 'src/types/types';
-import RoomReviewForm from 'src/components/room-review-form/room-review-form';
-import RoomReview from 'src/components/room-review/room-review';
-import { makeHash } from 'src/utils/utils';
+import { OfferId, Reviews } from '../../types/type';
+import RoomReviewForm from '../room-review-form/room-review-form';
+import RoomReview from '../room-review/room-review';
+import { makeHash } from '../../utils/utils';
 
 type RoomReviewProps = {
   isUserLoggedIn: boolean;

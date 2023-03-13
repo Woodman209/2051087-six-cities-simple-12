@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import OneStarInput from './one-star-input';
-import RoomReview from '../room-review/room-review';
+import { RoomReview } from '../../const';
 import { ChangeEvent, useEffect, useState, FormEvent } from 'react';
 
 type InputElement = HTMLTextAreaElement | HTMLInputElement

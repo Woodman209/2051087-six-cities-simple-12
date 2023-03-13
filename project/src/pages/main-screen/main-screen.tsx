@@ -65,7 +65,34 @@ function MainScreen({ count }: RentCountProps): JSX.Element {
             </form>
             <div className="cities__places-list places__list tabs__content">
               {
-                Array(count).fill(<MainScreenApp />)
+                Array(count).fill(<MainScreenApp offer={{
+                  bedrooms: 0,
+                  description: '',
+                  goods: [],
+                  host: {
+                    avatarUrl: '',
+                    id: 0,
+                    isPro: false,
+                    name: ''
+                  },
+                  id: 0,
+                  isPremium: false,
+                  images: [],
+                  location: {
+                    latitude: 0,
+                    longitude: 0
+                  },
+                  maxAdults: 0,
+                  price: 0,
+                  rating: 0,
+                  title: '',
+                  type: ''
+                }} onActive={function (): void {
+                  throw new Error('Function not implemented.');
+                } } onBlur={function (): void {
+                  throw new Error('Function not implemented.');
+                } }
+                />)
               }
             </div>
           </section>

@@ -9,11 +9,9 @@ import { Offer, Offers, Reviews } from '../../types/type';
 import { capitalizeFirstLetter, getPercentFromRating } from '../../utils/utils';
 
 type RoomProps = {
-  headerBlock?: JSX.Element;
   nearbyOffers: Offers;
   offer: Offer;
   reviews: Reviews;
-  userLogin: UserLogin;
   isUserLoggedIn: boolean;
 }
 
@@ -92,7 +90,7 @@ export default function PropertyScreen({ nearbyOffers, offer, reviews, isUserLog
                 <RoomDescription description={offer.description} />
               </div>
               <section className="property__reviews reviews">
-                <RoomReviews isUserLoggedIn={isUserLoggedIn} reviews={reviews} offerId={undefined} />
+                <RoomReviews isUserLoggedIn={isUserLoggedIn} reviews={reviews} offerId={offer.id} />
               </section>
             </div>
           </div>
@@ -107,3 +105,4 @@ export default function PropertyScreen({ nearbyOffers, offer, reviews, isUserLog
     </div>
   );
 }
+
