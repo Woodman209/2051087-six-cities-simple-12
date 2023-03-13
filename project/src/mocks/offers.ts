@@ -27,7 +27,7 @@ const firstOfferGoods: HardwareFeatures = [
 const loc: Location = {
   latitude: 45,
   longitude: 37
-}
+};
 
 export const userAngelina: User = {
   avatarUrl: 'img/avatar-angelina.jpg',
