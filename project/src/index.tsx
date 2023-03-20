@@ -30,7 +30,7 @@ root.render(
           zoom: 0
         },
         name: ''
-      }}
+      }} currentCityName={[]}
     />
   </React.StrictMode>,
 );

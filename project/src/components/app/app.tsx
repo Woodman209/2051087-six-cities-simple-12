@@ -1,3 +1,4 @@
+/* eslint-disable react/no-children-prop */
 /* eslint-disable react/jsx-closing-bracket-location */
 /* eslint-disable react/jsx-closing-tag-location */
 /* eslint-disable react/no-unused-prop-types */
@@ -11,6 +12,7 @@ import { LoginScreen } from '../../pages/login-screen/login-screen';
 import { AppRoute } from '../../const';
 import { GetNearbyOffers, Offers, Reviews, UserLogin, City, CityNames } from '../../types/type';
 import RoomWrapper from '../room-wrapper/room-wrapper';
+import { currentCity } from '../../store/mock';
 
 
 type RentCount = {
@@ -21,6 +23,7 @@ type RentCount = {
   userLogin: UserLogin;
   currentCity: City;
   cityNames: CityNames;
+  currentCityName: CityNames;
 }
 
 function App(props: RentCount): JSX.Element {
@@ -37,7 +40,7 @@ function App(props: RentCount): JSX.Element {
             },
             name: ''
           }}
-          >
+          currentCityName={currentCity.name} cityNames={[]} >
           </MainScreen>}
         />
         <Route

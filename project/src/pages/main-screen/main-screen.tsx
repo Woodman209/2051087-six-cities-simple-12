@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unused-prop-types */
 /* eslint-disable react/prop-types */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
@@ -13,11 +14,13 @@ type RentCountProps = {
   offers: Offers;
   currentCity: City;
   cityNames: CityNames;
+  children: never[];
+  currentCityName: string;
 }
 
 type ActiveOffer = Offer | null;
 
-function MainScreen({ count, offers, currentCity, cityNames }: RentCountProps): JSX.Element {
+function MainScreen({ count, offers, currentCity, cityNames, children }: RentCountProps): JSX.Element {
   const [hoveredOffer, setHoveredOffer] = useState<ActiveOffer>(null);
   return (
     <>
