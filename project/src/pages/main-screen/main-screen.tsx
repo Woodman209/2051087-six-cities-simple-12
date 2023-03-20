@@ -1,46 +1,35 @@
+/* eslint-disable react/no-unused-prop-types */
+/* eslint-disable react/prop-types */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+import { useState } from 'react';
 import MainScreenApp from '../../components/card/card-component';
+import GeoMap from '../../components/geo-map/geo-map';
+import { Offers, City, CityNames, Offer } from '../../types/type';
+import CitiesList from '../../components/cities-list/cities-list';
 
 type RentCountProps = {
   count: number;
+  offers: Offers;
+  currentCity: City;
+  cityNames: CityNames;
+  children: never[];
+  currentCityName: string;
 }
 
-function MainScreen({ count }: RentCountProps): JSX.Element {
+type ActiveOffer = Offer | null;
+
+function MainScreen({ count, offers, currentCity, cityNames, children }: RentCountProps): JSX.Element {
+  const [hoveredOffer, setHoveredOffer] = useState<ActiveOffer>(null);
   return (
     <>
       <div className="tabs">
         <section className="locations container">
-          <ul className="locations__list tabs__list">
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="/#">
-                <span>Paris</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="/#">
-                <span>Cologne</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="/#">
-                <span>Brussels</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item tabs__item--active" href="/#">
-                <span>Amsterdam</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="/#">
-                <span>Hamburg</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="/#">
-                <span>Dusseldorf</span>
-              </a>
-            </li>
-          </ul>
+          <CitiesList
+            cityNames={cityNames}
+            currentCityName={currentCity.name}
+          />
         </section>
       </div>
       <div className="cities">
@@ -65,12 +54,50 @@ function MainScreen({ count }: RentCountProps): JSX.Element {
             </form>
             <div className="cities__places-list places__list tabs__content">
               {
-                Array(count).fill(<MainScreenApp />)
+                Array(count).fill(<MainScreenApp offer={
+                  {
+                    bedrooms: 0,
+                    city: {
+                      location: {
+                        latitude: 52.370216,
+                        longitude: 4.895168,
+                        zoom: 8,
+                      },
+                      name: 'Amsterdam',
+                    },
+                    description: '',
+                    goods: [],
+                    host: {
+                      avatarUrl: '',
+                      id: 0,
+                      isPro: false,
+                      name: ''
+                    },
+                    id: 0,
+                    isPremium: false,
+                    images: [],
+                    location: {
+                      latitude: 0,
+                      longitude: 0,
+                      zoom: 8,
+                    },
+                    maxAdults: 0,
+                    price: 0,
+                    rating: 0,
+                    title: '',
+                    type: ''
+                  }
+                }
+                onActive={() => setHoveredOffer(null)}
+                onBlur={() => setHoveredOffer(null)}
+                // eslint-disable-next-line react/jsx-closing-bracket-location
+                />
+                )
               }
             </div>
           </section>
           <div className="cities__right-section">
-            <section className="cities__map map"></section>
+            <GeoMap activeOffer={hoveredOffer} currentCity={currentCity} offers={offers} className={offers.length <= 0 ? 'cities__map' : ''} />
           </div>
         </div>
       </div>
@@ -79,3 +106,4 @@ function MainScreen({ count }: RentCountProps): JSX.Element {
 }
 
 export default MainScreen;
+

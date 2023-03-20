@@ -1,4 +1,5 @@
-import { CityName, UserLogin } from '../types/type';
+import { UserLogin } from '../types/type';
+import { offers } from '../mocks/offers';
 
-export const currentCity: CityName = 'Amsterdam';
+export const [{ city: currentCity }] = offers;
 export const userLogin: UserLogin = 'fake@fake.fake';

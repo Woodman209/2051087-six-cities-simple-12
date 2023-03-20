@@ -1,25 +1,47 @@
+/* eslint-disable react/no-children-prop */
+/* eslint-disable react/jsx-closing-bracket-location */
+/* eslint-disable react/jsx-closing-tag-location */
+/* eslint-disable react/no-unused-prop-types */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable react/prop-types */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import MainScreen from '../../pages/main-screen/main-screen';
-// import MainEmptyScreen from '../../pages/main-empty-screen/main-empty-screen';
-// import PropertyNotLoggedScreen from '../../pages/property-not-logged-screen/property-not-logged-screen';
-import PropertyScreen from '../../pages/property-screen/property-screen';
 import ErrorNotFound from '../../pages/404-screen/404-screen';
 import { LoginScreen } from '../../pages/login-screen/login-screen';
 import { AppRoute } from '../../const';
+import { GetNearbyOffers, Offers, Reviews, UserLogin, City, CityNames } from '../../types/type';
+import RoomWrapper from '../room-wrapper/room-wrapper';
+import { currentCity } from '../../store/mock';
+
 
 type RentCount = {
   count: number;
+  getNearbyOffers: GetNearbyOffers;
+  offers: Offers;
+  reviews: Reviews;
+  userLogin: UserLogin;
+  currentCity: City;
+  cityNames: CityNames;
+  currentCityName: CityNames;
 }
 
-function App({ count }: RentCount): JSX.Element {
+function App(props: RentCount): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Root}
-          element={<MainScreen count={count}></MainScreen>}
+          element={<MainScreen count={props.count} offers={[]} currentCity={{
+            location: {
+              latitude: 0,
+              longitude: 0,
+              zoom: 0
+            },
+            name: ''
+          }}
+          currentCityName={currentCity.name} cityNames={[]} >
+          </MainScreen>}
         />
         <Route
           path={AppRoute.Login}
@@ -28,9 +50,8 @@ function App({ count }: RentCount): JSX.Element {
         <Route
           path={`${AppRoute.Room}:id`}
           element={
-            <PropertyScreen
+            <RoomWrapper
               getNearbyOffers={props.getNearbyOffers}
-              headerBlock={headerBlock}
               offers={props.offers}
               reviews={props.reviews}
               isUserLoggedIn={props.userLogin !== undefined}
