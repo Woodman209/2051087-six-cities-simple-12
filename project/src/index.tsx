@@ -5,6 +5,7 @@ import { userLogin } from './store/mock';
 import { offers, nearbyOffers } from './mocks/offers';
 import { reviews } from './types/reviews';
 import { Offers } from './types/type';
+import { CityNames } from './const';
 
 const Setting = {
   count: 3
@@ -22,6 +23,14 @@ root.render(
       offers={offers}
       reviews={reviews}
       userLogin={userLogin}
+      cityNames={CityNames} currentCity={{
+        location: {
+          latitude: 0,
+          longitude: 0,
+          zoom: 0
+        },
+        name: ''
+      }}
     />
   </React.StrictMode>,
 );

@@ -1,47 +1,21 @@
-import { useEffect, useRef, useState, } from 'react';
-import { Map as LeafletGeoMap, TileLayer } from 'leaflet';
-import { City, Location, Locations } from '../../types/type';
+import { City, Offers, Offer } from '../../types/type';
 import 'leaflet/dist/leaflet.css';
 import styles from './geo-map.module.css';
+import { useRef } from 'react';
+import { useGeoMap } from './use-geo-map';
+import { useGeoMapPins } from './use-geo-map-pins';
 
 type GeoMapProps = {
   className: string;
-  city?: City;
-  locations: Locations;
+  currentCity: City;
+  offers: Offers;
+  activeOffer: Offer | null;
 }
 
 function GeoMap(props: GeoMapProps): JSX.Element {
-  const [ geoMap, setGeoMap ] = useState<LeafletGeoMap | null>(null);
-  const isRenderedRef = useRef<boolean>(false);
   const nodeRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (isRenderedRef.current || !nodeRef.current) {
-      return;
-    }
-
-    const centerLocation = props.city?.location ?? calcCenter(props.locations);
-    const mapProperties = {
-      center: {
-        lat: centerLocation.latitude,
-        lng: centerLocation.longitude,
-      },
-      zoom: centerLocation.zoom,
-    };
-
-    const layer = new TileLayer(
-      'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
-      {
-        attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-      }
-    );
-
-    const mapInstance = new LeafletGeoMap(nodeRef.current, mapProperties);
-    mapInstance.addLayer(layer);
-    setGeoMap(mapInstance);
-    isRenderedRef.current = true;
-  }, [props.locations, props.city]);
+  const geoMap = useGeoMap(nodeRef, props.currentCity);
+  useGeoMapPins(geoMap, props.offers, props.activeOffer);
 
   return (
     <section
@@ -57,21 +31,5 @@ function GeoMap(props: GeoMapProps): JSX.Element {
   );
 }
 
-function calcCenter(locations: Locations): Location {
-  // FIXME: remove duplication
-  const minLatitude = Math.min(...locations.map(({ latitude }) => latitude));
-  const maxLatitude = Math.max(...locations.map(({ latitude }) => latitude));
-
-  const minLongitude = Math.min(...locations.map(({ longitude }) => longitude));
-  const maxLongitude = Math.max(...locations.map(({ longitude }) => longitude));
-
-  const minZoom = Math.min(...locations.map(({ zoom }) => zoom));
-
-  return {
-    latitude: (minLatitude + maxLatitude) / 2,
-    longitude: (minLongitude + maxLongitude) / 2,
-    zoom: minZoom,
-  };
-}
-
 export default GeoMap;
+
