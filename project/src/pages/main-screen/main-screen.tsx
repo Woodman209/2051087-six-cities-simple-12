@@ -1,10 +1,18 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import MainScreenApp from '../../components/card/card-component';
+import GeoMap from '../../components/geo-map/geo-map';
+import { Locations, Offers } from '../../types/type';
 
 type RentCountProps = {
   count: number;
+  offers: Offers;
 }
 
-function MainScreen({ count }: RentCountProps): JSX.Element {
+function MainScreen({ count, offers }: RentCountProps): JSX.Element {
+  const locations = getLocations(offers);
   return (
     <>
       <div className="tabs">
@@ -68,6 +76,14 @@ function MainScreen({ count }: RentCountProps): JSX.Element {
                 Array(count).fill(<MainScreenApp offer={
                   {
                     bedrooms: 0,
+                    city: {
+                      location: {
+                        latitude: 52.370216,
+                        longitude: 4.895168,
+                        zoom: 8,
+                      },
+                      name: 'Amsterdam',
+                    },
                     description: '',
                     goods: [],
                     host: {
@@ -81,7 +97,8 @@ function MainScreen({ count }: RentCountProps): JSX.Element {
                     images: [],
                     location: {
                       latitude: 0,
-                      longitude: 0
+                      longitude: 0,
+                      zoom: 8,
                     },
                     maxAdults: 0,
                     price: 0,
@@ -103,12 +120,16 @@ function MainScreen({ count }: RentCountProps): JSX.Element {
             </div>
           </section>
           <div className="cities__right-section">
-            <section className="cities__map map"></section>
+            <GeoMap className={locations.length <= 0 ? 'cities__map' : ''} locations={locations} />
           </div>
         </div>
       </div>
     </>
   );
+}
+
+function getLocations(offers: Offers): Locations {
+  return offers.map((offer) => offer.location);
 }
 
 export default MainScreen;

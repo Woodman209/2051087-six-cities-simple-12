@@ -26,7 +26,8 @@ const firstOfferGoods: HardwareFeatures = [
 
 const loc: Location = {
   latitude: 45,
-  longitude: 37
+  longitude: 37,
+  zoom: 8,
 };
 
 export const userAngelina: User = {
@@ -46,6 +47,14 @@ export const userMax: User = {
 export const offers: Offers = [
   {
     bedrooms: 3,
+    city: {
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 8,
+      },
+      name: 'Amsterdam',
+    },
     description: `
       A quiet cozy and picturesque that hides behind a river by the unique lightness of Amsterdam. The building is green and from 18th century.\n
       An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.
@@ -64,6 +73,14 @@ export const offers: Offers = [
   },
   {
     bedrooms: 1,
+    city: {
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 8,
+      },
+      name: 'Amsterdam',
+    },
     description: 'An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.',
     goods: [],
     host: userMax,
@@ -79,6 +96,14 @@ export const offers: Offers = [
   },
   {
     bedrooms: 2,
+    city: {
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 8,
+      },
+      name: 'Amsterdam',
+    },
     description: '',
     goods: [],
     host: userAngelina,
@@ -94,6 +119,14 @@ export const offers: Offers = [
   },
   {
     bedrooms: 3,
+    city: {
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 8,
+      },
+      name: 'Amsterdam',
+    },
     description: '',
     goods: [],
     host: userMax,
@@ -109,6 +142,14 @@ export const offers: Offers = [
   },
   {
     bedrooms: 1,
+    city: {
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 8,
+      },
+      name: 'Amsterdam',
+    },
     description: '',
     goods: [],
     host: userAngelina,
