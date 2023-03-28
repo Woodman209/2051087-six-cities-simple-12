@@ -8,8 +8,9 @@ import MainScreenApp from '../../components/card/card-component';
 import GeoMap from '../../components/geo-map/geo-map';
 import { City, CityNames, Offer, Offers } from '../../types/type';
 import CitiesList from '../../components/cities-list/cities-list';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { changeCity } from '../../store/action';
+import { filterOffersByCityName } from '../../utils/utils';
 
 type RentCountProps = {
   count: number;
@@ -24,6 +25,8 @@ type ActiveOffer = Offer | null;
 
 function MainScreen({ count, offers, currentCity, cityNames, children }: RentCountProps): JSX.Element {
   const [hoveredOffer, setHoveredOffer] = useState<ActiveOffer>(null);
+  const allOffers = useAppSelector((state) => state.offers);
+  const offerSec = filterOffersByCityName(allOffers, currentCity);
   const dispatch = useAppDispatch();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const mainTagAdditionalClassName = offers.length === 0 ?

@@ -13,6 +13,9 @@ import { AppRoute } from '../../const';
 import { GetNearbyOffers, Reviews, UserLogin, City, CityNames } from '../../types/type';
 import RoomWrapper from '../room-wrapper/room-wrapper';
 import { currentCity } from '../../store/mock';
+import { useAppDispatch } from '../../hooks';
+import { setOffers } from '../../store/action';
+import { offers } from '../../mocks/offers';
 
 
 type RentCount = {
@@ -26,6 +29,8 @@ type RentCount = {
 }
 
 function App(props: RentCount): JSX.Element {
+  const dispatch = useAppDispatch();
+  dispatch(setOffers(offers));
   return (
     <BrowserRouter>
       <Routes>
