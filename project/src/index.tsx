@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
 import { userLogin } from './store/mock';
-import { offers, nearbyOffers } from './mocks/offers';
+import { nearbyOffers } from './mocks/offers';
 import { reviews } from './types/reviews';
 import { Offers } from './types/type';
 import { CityNames } from './const';
@@ -23,7 +23,6 @@ root.render(
       <App
         count={Setting.count}
         getNearbyOffers={getNearbyOffers}
-        offers={offers}
         reviews={reviews}
         userLogin={userLogin}
         cityNames={CityNames} currentCity={{
@@ -33,7 +32,7 @@ root.render(
             zoom: 0
           },
           name: ''
-        }} currentCityName={[]}
+        }} currentCityName={[]} offers={[]}
       />
     </Provider>
   </React.StrictMode>,
