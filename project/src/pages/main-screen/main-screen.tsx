@@ -6,22 +6,31 @@
 import { useState } from 'react';
 import MainScreenApp from '../../components/card/card-component';
 import GeoMap from '../../components/geo-map/geo-map';
-import { Offers, City, CityNames, Offer } from '../../types/type';
+import { City, CityNames, Offer, Offers } from '../../types/type';
 import CitiesList from '../../components/cities-list/cities-list';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { changeCity } from '../../store/action';
 
 type RentCountProps = {
   count: number;
-  offers: Offers;
   currentCity: City;
   cityNames: CityNames;
   children: never[];
   currentCityName: string;
+  offers: Offers;
 }
 
 type ActiveOffer = Offer | null;
 
 function MainScreen({ count, offers, currentCity, cityNames, children }: RentCountProps): JSX.Element {
   const [hoveredOffer, setHoveredOffer] = useState<ActiveOffer>(null);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const allOffers = useAppSelector((state) => state.offers);
+  const dispatch = useAppDispatch();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const mainTagAdditionalClassName = offers.length === 0 ?
+    'page__main--index-empty' :
+    '' ;
   return (
     <>
       <div className="tabs">
@@ -29,6 +38,7 @@ function MainScreen({ count, offers, currentCity, cityNames, children }: RentCou
           <CitiesList
             cityNames={cityNames}
             currentCityName={currentCity.name}
+            onChangeCityName={(cityName) => dispatch(changeCity(cityName))}
           />
         </section>
       </div>
@@ -97,7 +107,7 @@ function MainScreen({ count, offers, currentCity, cityNames, children }: RentCou
             </div>
           </section>
           <div className="cities__right-section">
-            <GeoMap activeOffer={hoveredOffer} currentCity={currentCity} offers={offers} className={offers.length <= 0 ? 'cities__map' : ''} />
+            <GeoMap activeOffer={hoveredOffer} offers={offers} className={offers.length <= 0 ? 'cities__map' : ''} />
           </div>
         </div>
       </div>

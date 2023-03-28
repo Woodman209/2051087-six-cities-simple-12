@@ -1,4 +1,7 @@
 import { IconOptions } from 'leaflet';
+import { CityName } from './types/type';
+
+export const INITIAL_CITY_NAME: CityName = 'Paris' as const;
 
 export enum AppRoute {
   Root = '/',

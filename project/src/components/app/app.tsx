@@ -10,15 +10,17 @@ import MainScreen from '../../pages/main-screen/main-screen';
 import ErrorNotFound from '../../pages/404-screen/404-screen';
 import { LoginScreen } from '../../pages/login-screen/login-screen';
 import { AppRoute } from '../../const';
-import { GetNearbyOffers, Offers, Reviews, UserLogin, City, CityNames } from '../../types/type';
+import { GetNearbyOffers, Reviews, UserLogin, City, CityNames } from '../../types/type';
 import RoomWrapper from '../room-wrapper/room-wrapper';
 import { currentCity } from '../../store/mock';
+import { useAppDispatch } from '../../hooks';
+import { setOffers } from '../../store/action';
+import { offers } from '../../mocks/offers';
 
 
 type RentCount = {
   count: number;
   getNearbyOffers: GetNearbyOffers;
-  offers: Offers;
   reviews: Reviews;
   userLogin: UserLogin;
   currentCity: City;
@@ -27,6 +29,8 @@ type RentCount = {
 }
 
 function App(props: RentCount): JSX.Element {
+  const dispatch = useAppDispatch();
+  dispatch(setOffers(offers));
   return (
     <BrowserRouter>
       <Routes>
@@ -52,7 +56,6 @@ function App(props: RentCount): JSX.Element {
           element={
             <RoomWrapper
               getNearbyOffers={props.getNearbyOffers}
-              offers={props.offers}
               reviews={props.reviews}
               isUserLoggedIn={props.userLogin !== undefined}
             />
