@@ -1,4 +1,5 @@
 import { RATING_TO_PERCENT_STEP } from '../const';
+import { Offers } from '../types/type';
 
 export function getPercentFromRating(rating: number): string {
   const roundedPercent = Math.round(rating) * RATING_TO_PERCENT_STEP;
@@ -22,6 +23,10 @@ export function getMultipleOfPlaceWord(count: number): string {
     return 'place';
   }
   return 'places';
+}
+
+export function filterOffersByCityName(offers: Offers, cityName: string): Offers {
+  return offers.filter((offer) => offer.city.name === cityName);
 }
 
 export function isCurrentPage(currentPath: string, pathToCompare: string): boolean {
