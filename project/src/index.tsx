@@ -32,7 +32,7 @@ root.render(
             zoom: 0
           },
           name: ''
-        }} currentCityName={[]} offers={[]}
+        }} currentCityName={[]}
       />
     </Provider>
   </React.StrictMode>,
